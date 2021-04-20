@@ -1,6 +1,7 @@
-
 import java.util.ArrayList;
-
+/**
+ * Klasse Raum
+ */
 public class Raum {
 	private int geb;
 	private int etage;
@@ -22,7 +23,7 @@ public class Raum {
 		this.raum = raum;
 	}
 
-	// change toString method from here
+	// Tostring Methode
 	public String toString() {
 		if (reservierung.size() > 0) {
 			String antwort = this.getGeb() + "-" + this.getEtage() + "." + this.raum + "\n";
@@ -37,26 +38,53 @@ public class Raum {
 
 	}
 
+	/**
+	 * 
+	 * @return Gebäude
+	 */
 	public int getGeb() {
 		return geb;
 	}
 
-	public int getRaum() {
-		return raum;
-	}
-
+	/**
+	 * 
+	 * @return Etage
+	 */
 	public int getEtage() {
 		return etage;
 	}
 
+	/**
+	 * 
+	 * @return Raum
+	 */
+	public int getRaum() {
+		return raum;
+	}
+
+	
+
+	/**
+	 * 
+	 * @param index
+	 * @return Reservierung
+	 */
 	public Reservierung getReservierung(int index) {
 		return reservierung.get(index);
 	}
 
+	/**
+	 * 
+	 * @return Anzahl an Reservierungen
+	 */
 	public int getAnzahlReservierungen() {
 		return reservierung.size();
 	}
 
+	/**
+	 * Reservierung hinzufügen
+	 * @param res
+	 */
 	public void addReservierung(Reservierung res) {
 		reservierung.add(res);
 	}

@@ -1,16 +1,27 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * @author Emre, Simon
+ * Dialog Klasse
+ */
 public class Dialog {
     public Scanner sc = new Scanner(System.in);
     ArrayList<Mitarbeiter> emp = new ArrayList<>();
     ArrayList<Raum> rooms = new ArrayList<>();
 
+    /**
+     * Einlesen einer Integer-Eingabe durch den Nutzer
+     * @return Integer
+     */
     public int readInt() {
         int userInt = Integer.parseInt(sc.nextLine());
         return userInt;
     }
 
+    /**
+     * Einlesen einer String-Eingabe durch den Nutzer
+     * @return String
+     */
     public String readString() {
         String userString = sc.nextLine().trim();
         if (userString.isEmpty() != true) {
@@ -19,6 +30,9 @@ public class Dialog {
         throw new IllegalStateException("Eingabe ist Leer");
     }
 
+    /**
+     * Auflisten aller bestehenden Räume und anzeigen der bestehenden Buchungen
+     */
     public void displayRooms() {
         if (rooms.size() != 0) {
             for (int i = 0; i < rooms.size(); i++) {
@@ -27,6 +41,9 @@ public class Dialog {
         }
     }
 
+    /**
+     * Auflisten aller bestehenden Mitarbeiter
+     */
     public void displayEmp() {
         if (emp.size() != 0) {
             for (int i = 0; i < emp.size(); i++) {
@@ -35,6 +52,9 @@ public class Dialog {
         }
     }
 
+    /**
+     * Zum erstellen eines Raumes Dieser wird in der ArrayList <rooms> gespeichert
+     */
     public void createRaum() {
         System.out.print("Gebäude eingeben: ");
         int build = readInt();
@@ -45,6 +65,9 @@ public class Dialog {
         rooms.add(new Raum(build, floor, room));
     }
 
+    /**
+     * Zum erstellen eines Mitarbeiters Dieser wird in der ArrayList <emp> gespeichert
+     */
     public void createMitarbeiter() {
         System.out.print("Vorname: ");
         String fn = readString();
@@ -55,6 +78,10 @@ public class Dialog {
         emp.add(new Mitarbeiter(fn, ln, mail));
     }
 
+    /**
+     * Zum eingeben der Anfangszeit der Reservierung
+     * @return Uhrzeit(start)
+     */
     public Uhrzeit createUhrzeitAnfang() {
         System.out.print("Beginn Stunde: ");
         int hour = readInt();
@@ -63,6 +90,10 @@ public class Dialog {
         return new Uhrzeit(hour, min);
     }
 
+    /**
+     * Zum eingeben der Endzeit der Reservierung
+     * @return Uhrzeit(ende)
+     */
     public Uhrzeit createUhrzeitEnde() {
         System.out.print("Ende Stunde: ");
         int hour = readInt();
@@ -71,6 +102,9 @@ public class Dialog {
         return new Uhrzeit(hour, min);
     }
 
+    /**
+     * Erstellen einer Reservierung
+     */
     public void createReservierung() {
         while (true) {
             try {
@@ -100,6 +134,9 @@ public class Dialog {
 
     }
 
+    /**
+     * Start des Dialogs
+     */
     public void start() {
         final int RESERVIEREN = 1;
         final int MITARBEITERADD = 2;

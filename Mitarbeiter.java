@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
-
+/**
+ * Klasse zum erstellen eines Mitarbeiters. Diese Klasse erbt von der Klasse Person
+ */
 public class Mitarbeiter extends Person {
 	private String email;
 	protected ArrayList<Reservierung> buchungen = new ArrayList<Reservierung>();
@@ -11,16 +13,29 @@ public class Mitarbeiter extends Person {
 		
 	}
 
+	/**
+	 * 
+	 * @return email
+	 */
 	public String getEmail() {
 		return email;
 	}
-	
+	/**
+	 * tostring methode
+	 */
 	public String toString() {
 	
 		return super.getVorname() + " " + super.getNachname() + " " +"(" + this.getEmail() + ")";
 		
 	}
 	
+	/**
+	 * Methode um einer Reservierung abzuschließen
+	 * @param raum
+	 * @param begin
+	 * @param ende
+	 * @param bemerkung
+	 */
 	public void reserviere(Raum raum,Uhrzeit begin,Uhrzeit ende,String bemerkung) {
 		Reservierung res = new Reservierung(bemerkung,begin,ende);
 		res.setRaum(raum);
@@ -29,8 +44,6 @@ public class Mitarbeiter extends Person {
 		buchungen.add(res);
 		}
 	
-	
-
 	public boolean equals(Object obj) {
 		Mitarbeiter mit1 = (Mitarbeiter) obj;
 		
