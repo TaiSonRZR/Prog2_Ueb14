@@ -9,13 +9,13 @@ public class Raum {
 	protected ArrayList<Reservierung> reservierung = new ArrayList<Reservierung>();
 
 	public Raum(int geb, int etage, int raum) {
-		if (etage < 0 && etage > Integer.MAX_VALUE) {
+		if (etage < 0 || etage > Integer.MAX_VALUE) {
 			throw new IllegalArgumentException("Etage ist kleiner 0");
 		}
-		if (geb < 1 && geb > Integer.MAX_VALUE) {
+		if (geb < 1 || geb > Integer.MAX_VALUE) {
 			throw new IllegalArgumentException("Gebäude ist kleiner 1");
 		}
-		if (raum < 1 && raum > Integer.MAX_VALUE) {
+		if (raum < 1 || raum > Integer.MAX_VALUE) {
 			throw new IllegalArgumentException("Raum ist kleiner 1");
 		}
 		this.etage = etage;
