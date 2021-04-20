@@ -4,6 +4,7 @@ import java.util.Scanner;
  * @author Emre, Simon
  * Dialog Klasse
  */
+
 public class Dialog {
     public Scanner sc = new Scanner(System.in);
     ArrayList<Mitarbeiter> emp = new ArrayList<>();
@@ -51,6 +52,20 @@ public class Dialog {
             }
         }
     }
+
+    /**
+     * 
+     */
+
+     public void displayRes(){
+        displayRooms();
+        System.out.print("Raum auswählen: ");
+        int usrInp = readInt();
+        if(rooms.get(usrInp).getAnzahlReservierungen() == 0){
+            System.out.println("Keine Reservierung eingetragen");
+        }
+        System.out.println(rooms.get(usrInp).getAnzahlReservierungen());
+     }
 
     /**
      * Zum erstellen eines Raumes Dieser wird in der ArrayList <rooms> gespeichert
@@ -142,12 +157,13 @@ public class Dialog {
         final int MITARBEITERADD = 2;
         final int RAUMADD = 3;
         final int DISPLAYRAUM = 4;
+        final int DISPLAYRES = 5;
         final int BEENDEN = 0;
         int eingabe = -1;
 
         while (eingabe != BEENDEN) {
             System.out.print("Reservieren: " + RESERVIEREN + "  Mitarbeiter hinzufügen: " + MITARBEITERADD
-                    + "  Raum hinzufügen: " + RAUMADD + "  Räume anzeigen: " + DISPLAYRAUM + "  Beenden: " + BEENDEN
+                    + "  Raum hinzufügen: " + RAUMADD + "  Räume anzeigen: " + DISPLAYRAUM + "  Reservierungen Anzeigen: " + DISPLAYRES +"  Beenden: " + BEENDEN
                     + "\n");
             eingabe = readInt();
             try {
@@ -168,6 +184,11 @@ public class Dialog {
                     createRaum();
                 } else if (eingabe == DISPLAYRAUM) {
                     displayRooms();
+                } else if (eingabe == DISPLAYRES) {
+                    if (rooms.size() == 0){
+                        System.out.println("Kein Raum vorhanden");
+                    }
+                    displayRes();
                 } else if (eingabe == BEENDEN) {
                     break;
                 } else {

@@ -30,7 +30,7 @@ public class Raum {
 			for (int i = 0; i < reservierung.size(); i++) {
 				antwort += "gebucht von " + reservierung.get(i).von.toString() + " von "
 						+ reservierung.get(i).getBegin() + " bis " + reservierung.get(i).getEnde() + " für "
-						+ reservierung.get(i).getBemerkung() + "\n";
+						+ "\"" + reservierung.get(i).getBemerkung() + "\"" + "\n";
 			}
 			return antwort;
 		}
