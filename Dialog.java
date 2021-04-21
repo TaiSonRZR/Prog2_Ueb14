@@ -1,40 +1,85 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.nio.charset.StandardCharsets;
+
+
+/**
+ * @author Emre, Simon Dialog Klasse
+ */
 
 public class Dialog {
-    public Scanner sc = new Scanner(System.in);
+    public Scanner sc = new Scanner(System.in, StandardCharsets.UTF_8);
     ArrayList<Mitarbeiter> emp = new ArrayList<>();
     ArrayList<Raum> rooms = new ArrayList<>();
 
+    /**
+     * Einlesen einer Integer-Eingabe durch den Nutzer
+     * 
+     * @return Integer
+     */
     public int readInt() {
         int userInt = Integer.parseInt(sc.nextLine());
         return userInt;
     }
 
+    /**
+     * Einlesen einer String-Eingabe durch den Nutzer
+     * 
+     * @return String
+     */
     public String readString() {
+        // String userString = "/"" + sc.nextLine().trim() + "/""
+
         String userString = sc.nextLine().trim();
+        userString = (String) userString;
         if (userString.isEmpty() != true) {
             return userString;
         }
-        throw new IllegalStateException("Eingabe ist Leer");
+        throw new IllegalStateException("Eingabe ist  Leer");
     }
 
+    /**
+     * Auflisten aller bestehenden Räume und anzeigen der bestehenden Buchungen
+     */
     public void displayRooms() {
         if (rooms.size() != 0) {
             for (int i = 0; i < rooms.size(); i++) {
                 System.out.printf("%d. %s%n", i, rooms.get(i).toString());
             }
+        } else {
+            System.out.println("Es gibt kein Raum");
         }
     }
 
+    /**
+     * Auflisten aller bestehenden Mitarbeiter
+     */
     public void displayEmp() {
         if (emp.size() != 0) {
             for (int i = 0; i < emp.size(); i++) {
                 System.out.printf("%d. %s%n", i, emp.get(i).toString());
             }
+        } else {
+            System.out.println("Gibt es kein mitarbeiter!2");
         }
     }
 
+    /**
+     * 
+     */
+    public void displayRes() {
+        displayRooms();
+        System.out.print("Raum auswählen um die Menge der Reservierungen eines Raum zu sehen: ");
+        int usrInp = readInt();
+        if (rooms.get(usrInp).getAnzahlReservierungen() == 0) {
+            System.out.println("Keine Reservierung eingetragen");
+        }
+        System.out.println("es gibt " + rooms.get(usrInp).getAnzahlReservierungen() + " Reservierungen ");
+    }
+
+    /**
+     * Zum erstellen eines Raumes Dieser wird in der ArrayList <rooms> gespeichert
+     */
     public void createRaum() {
         System.out.print("Gebäude eingeben: ");
         int build = readInt();
@@ -45,6 +90,10 @@ public class Dialog {
         rooms.add(new Raum(build, floor, room));
     }
 
+    /**
+     * Zum erstellen eines Mitarbeiters Dieser wird in der ArrayList <emp>
+     * gespeichert
+     */
     public void createMitarbeiter() {
         System.out.print("Vorname: ");
         String fn = readString();
@@ -55,6 +104,11 @@ public class Dialog {
         emp.add(new Mitarbeiter(fn, ln, mail));
     }
 
+    /**
+     * Zum eingeben der Anfangszeit der Reservierung
+     * 
+     * @return Uhrzeit(start)
+     */
     public Uhrzeit createUhrzeitAnfang() {
         System.out.print("Beginn Stunde: ");
         int hour = readInt();
@@ -63,6 +117,11 @@ public class Dialog {
         return new Uhrzeit(hour, min);
     }
 
+    /**
+     * Zum eingeben der Endzeit der Reservierung
+     * 
+     * @return Uhrzeit(ende)
+     */
     public Uhrzeit createUhrzeitEnde() {
         System.out.print("Ende Stunde: ");
         int hour = readInt();
@@ -71,6 +130,9 @@ public class Dialog {
         return new Uhrzeit(hour, min);
     }
 
+    /**
+     * Erstellen einer Reservierung
+     */
     public void createReservierung() {
         while (true) {
             try {
@@ -88,7 +150,8 @@ public class Dialog {
                     } else {
                         System.out.print("Bemerkung: ");
                         String note = readString();
-                        emp.get(empInp).reserviere(rooms.get(roomInp), createUhrzeitAnfang(), createUhrzeitEnde(),note);
+                        emp.get(empInp).reserviere(rooms.get(roomInp), createUhrzeitAnfang(), createUhrzeitEnde(),
+                                note);
                         break;
                     }
                 }
@@ -100,18 +163,22 @@ public class Dialog {
 
     }
 
+    /**
+     * Start des Dialogs
+     */
     public void start() {
         final int RESERVIEREN = 1;
         final int MITARBEITERADD = 2;
         final int RAUMADD = 3;
         final int DISPLAYRAUM = 4;
+        final int DISPLAYRES = 5;
         final int BEENDEN = 0;
         int eingabe = -1;
 
         while (eingabe != BEENDEN) {
             System.out.print("Reservieren: " + RESERVIEREN + "  Mitarbeiter hinzufügen: " + MITARBEITERADD
-                    + "  Raum hinzufügen: " + RAUMADD + "  Räume anzeigen: " + DISPLAYRAUM + "  Beenden: " + BEENDEN
-                    + "\n");
+                    + "  Raum hinzufügen: " + RAUMADD + "  Räume anzeigen: " + DISPLAYRAUM
+                    + "  Reservierungen Anzeigen: " + DISPLAYRES + "  Beenden: " + BEENDEN + "\n");
             eingabe = readInt();
             try {
                 if (eingabe == RESERVIEREN) {
@@ -131,6 +198,12 @@ public class Dialog {
                     createRaum();
                 } else if (eingabe == DISPLAYRAUM) {
                     displayRooms();
+                } else if (eingabe == DISPLAYRES) {
+                    if (rooms.size() == 0) {
+                        System.out.println("Kein Raum vorhanden");
+                    } else {
+                        displayRes();
+                    }
                 } else if (eingabe == BEENDEN) {
                     break;
                 } else {

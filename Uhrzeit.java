@@ -1,10 +1,12 @@
-
+/**
+ * Klasse Uhrzeit
+ * Eigenschaften von Uhrzeit
+ */
 public class Uhrzeit {
 	private int stunde;
 	private int minute;
 
 	public Uhrzeit(int stunde, int minute) {
-		// kontrolle addieren
 		if (stunde < 0 || stunde > 23) {
 			throw new IllegalArgumentException("Ist größer als 23 oder kleiner als 0");
 		}
@@ -20,10 +22,18 @@ public class Uhrzeit {
 		return this.getStunde() + ":" + this.getMinute() + " Uhr";
 	}
 
+	/**
+	 * 
+	 * @return stunde
+	 */
 	public int getStunde() {
 		return stunde;
 	}
 
+	/**
+	 * 
+	 * @return minute
+	 */
 	public int getMinute() {
 		return minute;
 	}

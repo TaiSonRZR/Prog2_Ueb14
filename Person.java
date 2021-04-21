@@ -3,19 +3,40 @@ public class Person {
 	private String vorname;
 	private String nachname;
 
+	/**
+	 * Klasse Person
+	 */
 	public Person(String vorname, String nachname) {
-		this.vorname = vorname;
-		this.nachname = nachname;
+		if (!vorname.matches("\\p{IsLatin}+")){
+			throw new IllegalArgumentException("Vorname darf keine Sonderzeichen enthalten!");
+
+		} else if (!nachname.matches("\\p{IsLatin}+")) {
+			throw new IllegalArgumentException("Nachname darf keine Sonderzeichen enthalten!");
+
+		} else{
+			this.vorname = vorname;
+			this.nachname = nachname;
+		}
+	
 	}
 
+	/**
+	 * return vorname
+	 */
 	public String getVorname() {
 		return vorname;
 	}
-
+	/**
+	 * 
+	 * @return nachname
+	 */
 	public String getNachname() {
 		return nachname;
 	}
 
+	/**
+	 * tostring methode
+	 */
 	public String toString() {
 
 		return this.vorname + this.nachname;
