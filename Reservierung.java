@@ -14,7 +14,6 @@ public class Reservierung {
 		this.bemerkung= bemerkung;
 		this.begin= begin;
 		this.ende = ende;
-		
 	}
 	
 	/**
@@ -63,7 +62,29 @@ public class Reservierung {
 
 	//write to string
 	public String toString() {
-		return "strng";
+		return "Raum: " + this.raum.toString() + "Mitarbeiter : "+ this.von.toString()+
+				"Beginnt um:" + this.getBegin().toString() + "Endet : " + this.getEnde().toString() +
+				"Bemerkung : " + this.getBemerkung();
+	}
+	// override
+	public boolean equals(Object obj) {
+		Reservierung res = (Reservierung) obj;
+
+		if (this.getEnde() != res.getEnde())
+			return false;
+		
+		if (this.getBegin() != res.getBegin())
+		return false;
+
+
+		if (!this.getBemerkung().equals(res.getBemerkung()))
+			return false;
+		if(!this.von.equals(res.von))
+			return false;
+		if(!this.raum.equals(res.raum))
+			return false;
+		return true;
+
 	}
 
 
